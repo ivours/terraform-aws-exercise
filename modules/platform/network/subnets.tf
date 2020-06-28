@@ -4,8 +4,8 @@ resource "aws_subnet" "public" {
   cidr_block        = cidrsubnet(var.vpc_cidr_block, var.new_bits, count.index)
   availability_zone = var.availability_zones[count.index]
   tags = {
-    Name = "public-"
-  }  
+    Name = "public-${var.availability_zones[count.index]}"
+  }
 }
 
 resource "aws_subnet" "private" {
@@ -13,6 +13,9 @@ resource "aws_subnet" "private" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = cidrsubnet(var.vpc_cidr_block, var.new_bits, count.index + length(var.availability_zones))
   availability_zone = var.availability_zones[count.index]  
+  tags = {
+    Name = "private-${var.availability_zones[count.index]}"
+  }
 }
 
 resource "aws_route_table" "public" {

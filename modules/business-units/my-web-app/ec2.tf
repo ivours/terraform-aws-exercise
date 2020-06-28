@@ -14,11 +14,11 @@ resource "local_file" "ec2_private_key" {
 }
 
 resource "aws_instance" "nginx" {
-  ami             = data.aws_ami_ids.ubuntu.ids[0]
-  instance_type   = "t2.micro"
-  subnet_id       = var.nginx_subnet_id
-  security_groups = [aws_security_group.allow_http_ec2.id, aws_security_group.allow_ssh_ec2.id]
-  key_name        = aws_key_pair.main.key_name
+  ami                    = data.aws_ami_ids.ubuntu.ids[0]
+  instance_type          = "t2.micro"
+  subnet_id              = var.nginx_subnet_id
+  vpc_security_group_ids = [aws_security_group.allow_http_ec2.id, aws_security_group.allow_ssh_ec2.id]
+  key_name               = aws_key_pair.main.key_name
   user_data = <<-EOF
                 #!/bin/bash
                 sudo apt-get -y update
@@ -32,11 +32,11 @@ resource "aws_instance" "nginx" {
 }
 
 resource "aws_instance" "apache" {
-  ami             = data.aws_ami_ids.ubuntu.ids[0]
-  instance_type   = "t2.micro"
-  subnet_id       = var.apache_subnet_id
-  security_groups = [aws_security_group.allow_http_ec2.id, aws_security_group.allow_ssh_ec2.id]
-  key_name        = aws_key_pair.main.key_name
+  ami                    = data.aws_ami_ids.ubuntu.ids[0]
+  instance_type          = "t2.micro"
+  subnet_id              = var.apache_subnet_id
+  vpc_security_group_ids = [aws_security_group.allow_http_ec2.id, aws_security_group.allow_ssh_ec2.id]
+  key_name               = aws_key_pair.main.key_name
   user_data = <<-EOF
                 #!/bin/bash
                 sudo apt-get -y update

@@ -2,7 +2,7 @@ resource "aws_instance" "nginx" {
   ami             = data.aws_ami_ids.ubuntu.ids[0]
   instance_type   = "t2.micro"
   subnet_id       = var.nginx_subnet_id
-  security_groups = [aws_security_group.allow_http.id]
+  security_groups = [aws_security_group.allow_http_ec2.id]
   user_data = <<-EOF
                 #!/bin/bash
                 sudo apt-get -y update
@@ -19,7 +19,7 @@ resource "aws_instance" "apache" {
   ami             = data.aws_ami_ids.ubuntu.ids[0]
   instance_type   = "t2.micro"
   subnet_id       = var.apache_subnet_id
-  security_groups = [aws_security_group.allow_http.id]
+  security_groups = [aws_security_group.allow_http_ec2.id]
   user_data = <<-EOF
                 #!/bin/bash
                 sudo apt-get -y update

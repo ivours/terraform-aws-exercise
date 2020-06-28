@@ -6,9 +6,10 @@ module "network" {
 }
 
 module "my-web-app" {
-  source           = "./modules/business-units/my-web-app"
-  vpc_id           = module.network.vpc_id
-  vpc_cidr_block   = var.vpc_cidr_block
-  nginx_subnet_id  = module.network.private_subnets_ids[0]
-  apache_subnet_id = module.network.private_subnets_ids[1]
+  source             = "./modules/business-units/my-web-app"
+  vpc_id             = module.network.vpc_id
+  vpc_cidr_block     = var.vpc_cidr_block
+  nginx_subnet_id    = module.network.private_subnets_ids[0]
+  apache_subnet_id   = module.network.private_subnets_ids[1]
+  public_subnets_ids = module.network.public_subnets_ids
 }

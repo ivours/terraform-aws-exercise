@@ -5,7 +5,7 @@ Exercise that involves creating an ALB and two EC2 instgances with NGINX and Apa
 
 Log in to AWS with your IAM credentials and execute `terraform init && terraform apply`.
 
-After the infrastructure has been deployed, just do `curl $ALB_URL` replacing $ALB_URL with the URL shown as output after applying the Terraform scripts.
+After the infrastructure has been deployed, just do `curl $ALB_URL` replacing $ALB_URL with the URL shown as output after applying the Terraform scripts. If the ALB doesn't respond instantly after applying the Terraform scripts, please wait a minute until EC2 instances and target group finish initializing.
 
 You'll find a .pem file (created after apply) to connect to the EC2 instances if needed, in `modules/my-web-app/ec2_private_key.pem`. These are in private subnets, so you'll need to create a bastion host or Cloud9 instance in a public subnet if you want to connect to them via SSH.
 
